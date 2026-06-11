@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bracket Classmeet – SMKN Batujaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #111111;
+    --white: #FFFFFF;
+    --yellow: #FFD600;
+    --pink: #FF6B6B;
+    --teal: #4ECDC4;
+    --purple: #A78BFA;
+    --green: #6BCB77;
+    --orange: #FF9F1C;
+    --shadow: 4px 4px 0px var(--black);
+    --shadow-lg: 6px 6px 0px var(--black);
+    --radius: 14px;
+    --border: 2.5px solid var(--black);
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: #F0EFEB;
+    min-height: 100vh;
+    color: var(--black);
+  }
+
+  /* ─── HEADER ─── */
+  .site-header {
+    background: var(--black);
+    color: var(--yellow);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 4px solid var(--yellow);
+  }
+  .site-header .logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+  .site-header .logo span { color: var(--pink); }
+  .site-header .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 2px;
+  }
+
+  /* ─── SETUP SCREEN ─── */
+  #setup-screen {
+    max-width: 620px;
+    margin: 48px auto;
+    padding: 0 20px;
+  }
+  .setup-card {
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 32px;
+  }
+  .setup-card h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .setup-card h2 .badge {
+    background: var(--yellow);
+    border: var(--border);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    font-weight: 700;
+  }
+  .field-group { margin-bottom: 20px; }
+  .field-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .field-group input, .field-group select {
+    width: 100%;
+    padding: 10px 14px;
+    border: var(--border);
+    border-radius: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    background: #FAFAFA;
+    outline: none;
+    transition: box-shadow .15s;
+  }
+  .field-group input:focus, .field-group select:focus {
+    box-shadow: var(--shadow);
+    background: var(--white);
+  }
+
+  .participant-count-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .count-btn {
+    width: 36px; height: 36px;
+    border: var(--border);
+    border-radius: 8px;
+    background: var(--yellow);
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--black);
+    transition: transform .1s, box-shadow .1s;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .count-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--black); }
+  .count-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  #participants-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .participant-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .participant-input-row .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 26px;
+    color: #888;
+  }
+  .participant-input-row input {
+    flex: 1;
+    padding: 8px 12px;
+    border: var(--border);
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    background: #FAFAFA;
+    outline: none;
+  }
+  .participant-input-row input:focus {
+    box-shadow: 3px 3px 0 var(--black);
+    background: var(--white);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: var(--black);
+    color: var(--yellow);
+    border: var(--border);
+    border-radius: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: transform .1s, box-shadow .1s;
+    margin-top: 12px;
+  }
+  .btn-primary:hover { background: #222; }
+  .btn-primary:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 var(--black); }
+
+  /* ─── BRACKET SCREEN ─── */
+  #bracket-screen { display: none; padding: 20px; }
+
+  .bracket-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .bracket-title h1 {
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .bracket-title .event-tag {
+    display: inline-block;
+    background: var(--pink);
+    border: var(--border);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    margin-top: 6px;
+  }
+  .btn-reset {
+    padding: 10px 20px;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform .1s, box-shadow .1s;
+  }
+  .btn-reset:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--black); }
+
+  /* ─── BRACKET LAYOUT ─── */
+  .bracket-container {
+    overflow-x: auto;
+    padding-bottom: 24px;
+  }
+  .bracket-layout {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: max-content;
+  }
+
+  .round-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .round-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    border: var(--border);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  }
+
+  /* Round colors */
+  .round-r16 .round-label  { background: #E8F4FD; }
+  .round-qf  .round-label  { background: #E8FDF4; }
+  .round-sf  .round-label  { background: var(--yellow); }
+  .round-f   .round-label  { background: var(--pink); color: var(--white); }
+  .round-3rd .round-label  { background: #EDE9FE; }
+
+  .matches-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0;
+  }
+
+  /* ─── CONNECTOR LINES ─── */
+  .connector {
+    display: flex;
+    align-items: center;
+  }
+  .connector svg { display: block; }
+
+  /* ─── MATCH CARD ─── */
+  .match-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .match-card {
+    width: 170px;
+    border: var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--white);
+    flex-shrink: 0;
+  }
+  .match-card .match-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    background: var(--black);
+    color: #aaa;
+  }
+  .match-card .participant {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background .15s;
+    border-top: 2px solid transparent;
+    min-height: 38px;
+    position: relative;
+  }
+  .match-card .participant:hover { background: #F5F5F5; }
+  .match-card .participant.winner {
+    background: var(--yellow) !important;
+    font-weight: 800;
+  }
+  .match-card .participant.loser { opacity: 0.45; }
+  .match-card .participant.tbd { color: #aaa; font-style: italic; cursor: default; }
+  .match-card .p-seed {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #999;
+    min-width: 16px;
+  }
+  .match-card .p-name {
+    font-size: 13px;
+    font-weight: 700;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .match-card .p-crown { font-size: 12px; margin-left: auto; }
+  .match-card .divider {
+    height: 2px;
+    background: var(--black);
+    opacity: 0.08;
+  }
+
+  /* Round accent bar */
+  .round-r16 .match-card  { border-left: 5px solid #90CAF9; }
+  .round-qf  .match-card  { border-left: 5px solid var(--teal); }
+  .round-sf  .match-card  { border-left: 5px solid var(--orange); }
+  .round-f   .match-card  { border-left: 5px solid var(--pink); }
+  .round-3rd .match-card  { border-left: 5px solid var(--purple); }
+
+  /* ─── CHAMPION CARD ─── */
+  .champion-card {
+    background: var(--black);
+    border: var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-lg);
+    padding: 16px 20px;
+    text-align: center;
+    min-width: 160px;
+  }
+  .champion-card .trophy { font-size: 28px; }
+  .champion-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--yellow);
+    font-weight: 700;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .champion-card .name {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--white);
+    margin-top: 4px;
+    min-height: 24px;
+  }
+
+  /* ─── THIRD PLACE ─── */
+  .third-place-section {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .third-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--purple);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 4px 12px;
+  }
+
+  /* ─── RESULTS PANEL ─── */
+  .results-panel {
+    margin-top: 32px;
+    display: none;
+    background: var(--black);
+    border: var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    color: var(--white);
+    max-width: 400px;
+  }
+  .results-panel h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--yellow);
+    margin-bottom: 16px;
+  }
+  .podium-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+  }
+  .podium-row:last-child { border-bottom: none; }
+  .podium-medal { font-size: 22px; min-width: 32px; }
+  .podium-name { font-size: 16px; font-weight: 700; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .match-card { width: 140px; }
+    .match-card .p-name { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div>
+    <div class="logo">SMKN <span>Batujaya</span></div>
+    <div class="sub">CLASS MEET TOURNAMENT BRACKET</div>
+  </div>
+</header>
+
+<!-- SETUP SCREEN -->
+<div id="setup-screen">
+  <div class="setup-card">
+    <h2>⚙️ Setup Turnamen <span class="badge">STEP 1</span></h2>
+
+    <div class="field-group">
+      <label>Nama Lomba</label>
+      <input type="text" id="event-name" value="Futsal" placeholder="cth: Futsal, Badminton, Tenis Meja…">
+    </div>
+
+    <div class="field-group">
+      <label>Jumlah Peserta</label>
+      <div class="participant-count-row">
+        <button class="count-btn" id="btn-dec">−</button>
+        <span class="count-display" id="count-display">8</span>
+        <button class="count-btn" id="btn-inc">+</button>
+        <span style="font-size:13px;color:#888;font-family:'JetBrains Mono',monospace;">/ 4–16</span>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Nama Peserta</label>
+      <div id="participants-list"></div>
+    </div>
+
+    <button class="btn-primary" id="btn-start">🚀 Mulai Bracket</button>
+  </div>
+</div>
+
+<!-- BRACKET SCREEN -->
+<div id="bracket-screen">
+  <div class="bracket-header">
+    <div class="bracket-title">
+      <h1>🏆 Bracket Classmeet<br>SMKN Batujaya</h1>
+      <div class="event-tag" id="display-event-name">Futsal</div>
+    </div>
+    <button class="btn-reset" id="btn-reset">← Atur Ulang</button>
+  </div>
+
+  <div class="bracket-container">
+    <div class="bracket-layout" id="bracket-layout"></div>
+  </div>
+
+  <div class="third-place-section" id="third-place-section"></div>
+
+  <div class="results-panel" id="results-panel">
+    <h3>🎖️ Hasil Akhir</h3>
+    <div id="podium-list"></div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+let participantCount = 8;
+let tournamentData = {};
+
+// ─────────────────────────────────────────────
+//  SETUP SCREEN LOGIC
+// ─────────────────────────────────────────────
+const countDisplay = document.getElementById('count-display');
+const participantsList = document.getElementById('participants-list');
+
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+function renderParticipantInputs() {
+  countDisplay.textContent = participantCount;
+  participantsList.innerHTML = '';
+  for (let i = 1; i <= participantCount; i++) {
+    const row = document.createElement('div');
+    row.className = 'participant-input-row';
+    row.innerHTML = `
+      <span class="num">#${String(i).padStart(2,'0')}</span>
+      <input type="text" id="p-${i}" placeholder="Peserta ${i}" value="">
+    `;
+    participantsList.appendChild(row);
+  }
+}
+
+document.getElementById('btn-dec').addEventListener('click', () => {
+  participantCount = clamp(participantCount - 1, 4, 16);
+  renderParticipantInputs();
+});
+document.getElementById('btn-inc').addEventListener('click', () => {
+  participantCount = clamp(participantCount + 1, 4, 16);
+  renderParticipantInputs();
+});
+
+document.getElementById('btn-start').addEventListener('click', () => {
+  const eventName = document.getElementById('event-name').value.trim() || 'Classmeet';
+  const participants = [];
+  for (let i = 1; i <= participantCount; i++) {
+    const val = document.getElementById(`p-${i}`).value.trim();
+    participants.push(val || `Peserta ${i}`);
+  }
+  startTournament(eventName, participants);
+});
+
+renderParticipantInputs();
+
+// ─────────────────────────────────────────────
+//  BRACKET LOGIC
+// ─────────────────────────────────────────────
+
+// Returns next power-of-2 >= n
+function nextPow2(n) {
+  let p = 1;
+  while (p < n) p *= 2;
+  return p;
+}
+
+function buildBracket(participants) {
+  const n = participants.length;
+  const slots = nextPow2(n); // bracket size
+  const byes = slots - n;
+
+  // Seed participants + byes
+  const seeded = [];
+  for (let i = 0; i < slots; i++) {
+    seeded.push(i < n ? { name: participants[i], seed: i + 1 } : null); // null = bye
+  }
+
+  // Build rounds
+  // rounds[0] = R16/R8/R4, etc.
+  const rounds = [];
+  let currentSlots = seeded;
+
+  while (currentSlots.length > 1) {
+    const matches = [];
+    for (let i = 0; i < currentSlots.length; i += 2) {
+      const a = currentSlots[i];
+      const b = currentSlots[i + 1];
+      const match = {
+        id: `M${rounds.length + 1}-${matches.length + 1}`,
+        a: a, // participant obj or null(bye) or {fromMatch, side}
+        b: b,
+        winner: null,
+        roundIdx: rounds.length,
+      };
+      // Auto-advance bye
+      if (a && !b) match.winner = 'a';
+      if (!a && b) match.winner = 'b';
+      if (!a && !b) match.winner = 'a'; // edge case
+      matches.push(match);
+    }
+    rounds.push(matches);
+    // Next round placeholders
+    currentSlots = matches.map((_, idx) => ({ fromMatch: rounds.length - 1, matchIdx: idx }));
+  }
+
+  return rounds;
+}
+
+function getRoundName(roundIdx, totalRounds) {
+  const fromEnd = totalRounds - 1 - roundIdx;
+  if (fromEnd === 0) return 'Final';
+  if (fromEnd === 1) return 'Semifinal';
+  if (fromEnd === 2) return 'Perempat Final';
+  if (fromEnd === 3) return '16 Besar';
+  return `Babak ${roundIdx + 1}`;
+}
+
+function getRoundClass(roundIdx, totalRounds) {
+  const fromEnd = totalRounds - 1 - roundIdx;
+  if (fromEnd === 0) return 'round-f';
+  if (fromEnd === 1) return 'round-sf';
+  if (fromEnd === 2) return 'round-qf';
+  return 'round-r16';
+}
+
+// Resolve participant name for a match slot
+function resolveParticipant(slot, rounds) {
+  if (!slot) return null;
+  if (slot.name) return slot; // direct participant
+  if (slot.seed) return slot;
+  // from match
+  const { fromMatch, matchIdx } = slot;
+  const match = rounds[fromMatch][matchIdx];
+  if (!match.winner) return null; // TBD
+  const winnerSlot = match.winner === 'a' ? match.a : match.b;
+  return resolveParticipant(winnerSlot, rounds);
+}
+
+function resolveLoser(match, rounds) {
+  if (!match.winner) return null;
+  const loserSlot = match.winner === 'a' ? match.b : match.a;
+  return resolveParticipant(loserSlot, rounds);
+}
+
+// ─────────────────────────────────────────────
+//  START TOURNAMENT
+// ─────────────────────────────────────────────
+function startTournament(eventName, participants) {
+  const rounds = buildBracket(participants);
+
+  // 3rd place match uses losers of SF
+  let thirdPlaceMatch = null;
+  const totalRounds = rounds.length;
+  if (totalRounds >= 2) {
+    const sfMatches = rounds[totalRounds - 2];
+    thirdPlaceMatch = {
+      id: '3RD',
+      sfA: { roundIdx: totalRounds - 2, matchIdx: 0 },
+      sfB: { roundIdx: totalRounds - 2, matchIdx: sfMatches.length > 1 ? 1 : 0 },
+      winner: null,
+      roundIdx: -1,
+    };
+  }
+
+  tournamentData = { rounds, thirdPlaceMatch, eventName, participants };
+
+  document.getElementById('setup-screen').style.display = 'none';
+  document.getElementById('bracket-screen').style.display = 'block';
+  document.getElementById('display-event-name').textContent = eventName;
+
+  renderBracket();
+}
+
+// ─────────────────────────────────────────────
+//  RENDER BRACKET
+// ─────────────────────────────────────────────
+function renderBracket() {
+  const { rounds, thirdPlaceMatch } = tournamentData;
+  const totalRounds = rounds.length;
+  const layout = document.getElementById('bracket-layout');
+  layout.innerHTML = '';
+
+  rounds.forEach((matches, rIdx) => {
+    const roundClass = getRoundClass(rIdx, totalRounds);
+    const roundName = getRoundName(rIdx, totalRounds);
+
+    // Connector before (except first round)
+    if (rIdx > 0) {
+      const prevMatches = rounds[rIdx - 1].length;
+      const currMatches = matches.length;
+      const connectorCol = buildConnectors(prevMatches, currMatches, rIdx);
+      layout.appendChild(connectorCol);
+    }
+
+    const col = document.createElement('div');
+    col.className = `round-col ${roundClass}`;
+
+    const label = document.createElement('div');
+    label.className = 'round-label';
+    label.textContent = roundName;
+    col.appendChild(label);
+
+    const matchesCol = document.createElement('div');
+    matchesCol.className = 'matches-col';
+    matchesCol.style.gap = getMatchGap(rIdx, totalRounds, rounds[0].length) + 'px';
+
+    matches.forEach((match, mIdx) => {
+      const card = buildMatchCard(match, rIdx, mIdx);
+      matchesCol.appendChild(card);
+    });
+
+    col.appendChild(matchesCol);
+    layout.appendChild(col);
+  });
+
+  // Champion
+  const finalMatch = rounds[totalRounds - 1][0];
+  const champion = finalMatch.winner ? resolveParticipant(
+    finalMatch.winner === 'a' ? finalMatch.a : finalMatch.b, rounds
+  ) : null;
+
+  const champConnector = buildChampConnector();
+  layout.appendChild(champConnector);
+
+  const champCard = document.createElement('div');
+  champCard.className = 'round-col';
+  champCard.innerHTML = `
+    <div class="round-label" style="background:var(--yellow)">Juara</div>
+    <div class="champion-card">
+      <div class="trophy">🏆</div>
+      <div class="label">Juara 1</div>
+      <div class="name" id="champ-name">${champion ? champion.name : '?'}</div>
+    </div>
+  `;
+  layout.appendChild(champCard);
+
+  // 3rd place
+  renderThirdPlace();
+  renderResults();
+}
+
+function getMatchGap(rIdx, totalRounds, firstRoundCount) {
+  // Gap grows as rounds shrink
+  const baseH = 80; // match card height estimate
+  const firstCount = firstRoundCount;
+  const thisCount = Math.ceil(firstCount / Math.pow(2, rIdx));
+  if (thisCount <= 1) return 0;
+  const totalH = firstCount * (baseH + 8);
+  return Math.max(8, (totalH / thisCount) - baseH - 8);
+}
+
+function buildMatchCard(match, rIdx, mIdx) {
+  const { rounds } = tournamentData;
+  const pA = resolveParticipant(match.a, rounds);
+  const pB = resolveParticipant(match.b, rounds);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'match-wrapper';
+
+  const card = document.createElement('div');
+  card.className = 'match-card';
+
+  const idBar = document.createElement('div');
+  idBar.className = 'match-id';
+  idBar.textContent = match.id;
+  card.appendChild(idBar);
+
+  // Auto handle byes silently
+  const isBye = (!match.a && match.b) || (match.a && !match.b) || (!match.a && !match.b);
+  const aClass = getParticipantClass(match, 'a', pA, pB, isBye);
+  const bClass = getParticipantClass(match, 'b', pB, pA, isBye);
+
+  card.appendChild(buildParticipantRow(pA, match.a, aClass, 'a', match, rIdx, mIdx));
+  const div = document.createElement('div');
+  div.className = 'divider';
+  card.appendChild(div);
+  card.appendChild(buildParticipantRow(pB, match.b, bClass, 'b', match, rIdx, mIdx));
+
+  wrapper.appendChild(card);
+  return wrapper;
+}
+
+function getParticipantClass(match, side, p, opp, isBye) {
+  if (!p) return 'tbd';
+  if (match.winner === side) return 'winner';
+  if (match.winner && match.winner !== side) return 'loser';
+  return '';
+}
+
+function buildParticipantRow(p, slot, cls, side, match, rIdx, mIdx) {
+  const row = document.createElement('div');
+  row.className = `participant ${cls}`;
+
+  if (!p) {
+    row.classList.add('tbd');
+    row.innerHTML = `<span class="p-seed">–</span><span class="p-name">TBD</span>`;
+    return row;
+  }
+
+  const seed = p.seed ? `<span class="p-seed">${p.seed}</span>` : `<span class="p-seed">–</span>`;
+  const crown = match.winner === side ? `<span class="p-crown">👑</span>` : '';
+  row.innerHTML = `${seed}<span class="p-name">${p.name}</span>${crown}`;
+
+  // Only clickable if both participants resolved and no winner yet
+  const { rounds } = tournamentData;
+  const pA = resolveParticipant(match.a, rounds);
+  const pB = resolveParticipant(match.b, rounds);
+
+  if (pA && pB && !match.winner) {
+    row.style.cursor = 'pointer';
+    row.addEventListener('click', () => {
+      match.winner = side;
+      renderBracket();
+    });
+  } else if (match.winner === side) {
+    // Toggle: click winner to undo
+    row.addEventListener('click', () => {
+      match.winner = null;
+      // Cascade: clear downstream matches that relied on this
+      cascadeClear(rIdx, mIdx, rounds);
+      renderBracket();
+    });
+  }
+
+  return row;
+}
+
+function cascadeClear(rIdx, mIdx, rounds) {
+  // Find next round match that uses this match's output
+  const nextRoundIdx = rIdx + 1;
+  if (nextRoundIdx >= rounds.length) return;
+  const nextMatchIdx = Math.floor(mIdx / 2);
+  const nextMatch = rounds[nextRoundIdx][nextMatchIdx];
+  if (nextMatch && nextMatch.winner) {
+    nextMatch.winner = null;
+    cascadeClear(nextRoundIdx, nextMatchIdx, rounds);
+  }
+  // Also clear 3rd place if SF changed
+  const { thirdPlaceMatch } = tournamentData;
+  if (thirdPlaceMatch && rIdx === rounds.length - 2) {
+    thirdPlaceMatch.winner = null;
+  }
+}
+
+function buildConnectors(prevCount, currCount, rIdx) {
+  const MATCH_H = 80;
+  const GAP_PREV = getMatchGap(rIdx - 1, tournamentData.rounds.length, tournamentData.rounds[0].length);
+  const GAP_CURR = getMatchGap(rIdx, tournamentData.rounds.length, tournamentData.rounds[0].length);
+  const unitH = MATCH_H + GAP_PREV;
+  const totalH = prevCount * unitH;
+  const W = 36;
+
+  const div = document.createElement('div');
+  div.style.cssText = `display:flex;flex-direction:column;justify-content:center;width:${W}px;height:${totalH + 20}px;flex-shrink:0;`;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', totalH + 20);
+
+  for (let i = 0; i < currCount; i++) {
+    const aIdx = i * 2;
+    const bIdx = i * 2 + 1;
+    const aY = (aIdx * unitH) + MATCH_H / 2 + 10;
+    const bY = bIdx < prevCount ? (bIdx * unitH) + MATCH_H / 2 + 10 : aY;
+    const midY = (aY + bY) / 2;
+    const outY = midY;
+
+    // horizontal from A
+    const lineA = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    lineA.setAttribute('x1', 0); lineA.setAttribute('y1', aY);
+    lineA.setAttribute('x2', W / 2); lineA.setAttribute('y2', aY);
+    lineA.setAttribute('stroke', '#CCC'); lineA.setAttribute('stroke-width', '2');
+    svg.appendChild(lineA);
+
+    if (bIdx < prevCount) {
+      const lineB = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      lineB.setAttribute('x1', 0); lineB.setAttribute('y1', bY);
+      lineB.setAttribute('x2', W / 2); lineB.setAttribute('y2', bY);
+      lineB.setAttribute('stroke', '#CCC'); lineB.setAttribute('stroke-width', '2');
+      svg.appendChild(lineB);
+
+      // vertical connector
+      const lineV = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      lineV.setAttribute('x1', W / 2); lineV.setAttribute('y1', aY);
+      lineV.setAttribute('x2', W / 2); lineV.setAttribute('y2', bY);
+      lineV.setAttribute('stroke', '#CCC'); lineV.setAttribute('stroke-width', '2');
+      svg.appendChild(lineV);
+    }
+
+    // horizontal to next
+    const lineOut = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    lineOut.setAttribute('x1', W / 2); lineOut.setAttribute('y1', outY);
+    lineOut.setAttribute('x2', W); lineOut.setAttribute('y2', outY);
+    lineOut.setAttribute('stroke', '#CCC'); lineOut.setAttribute('stroke-width', '2');
+    svg.appendChild(lineOut);
+  }
+
+  div.appendChild(svg);
+  return div;
+}
+
+function buildChampConnector() {
+  const div = document.createElement('div');
+  div.style.cssText = 'display:flex;align-items:center;width:28px;flex-shrink:0;';
+  div.innerHTML = `<svg width="28" height="4"><line x1="0" y1="2" x2="28" y2="2" stroke="#CCC" stroke-width="2"/></svg>`;
+  return div;
+}
+
+// ─────────────────────────────────────────────
+//  THIRD PLACE
+// ─────────────────────────────────────────────
+function renderThirdPlace() {
+  const { rounds, thirdPlaceMatch } = tournamentData;
+  const section = document.getElementById('third-place-section');
+  section.innerHTML = '';
+
+  if (!thirdPlaceMatch) return;
+  const totalRounds = rounds.length;
+  if (totalRounds < 2) return;
+
+  const sfMatches = rounds[totalRounds - 2];
+  const sfMatch1 = sfMatches[0];
+  const sfMatch2 = sfMatches.length > 1 ? sfMatches[1] : sfMatches[0];
+
+  const loser1 = sfMatch1.winner ? resolveLoser(sfMatch1, rounds) : null;
+  const loser2 = sfMatch2.winner ? resolveLoser(sfMatch2, rounds) : null;
+
+  // Only show if at least one SF is resolved
+  if (!loser1 && !loser2) return;
+
+  const labelEl = document.createElement('div');
+  labelEl.className = 'third-label';
+  labelEl.textContent = '🥉 Perebutan Juara 3';
+  section.appendChild(labelEl);
+
+  // Build a fake match object for 3rd place
+  const pA = loser1;
+  const pB = loser2;
+
+  const card = document.createElement('div');
+  card.className = 'match-card round-3rd';
+  card.innerHTML = `<div class="match-id">${thirdPlaceMatch.id}</div>`;
+
+  // Row A
+  const rowA = document.createElement('div');
+  rowA.className = `participant ${thirdPlaceMatch.winner === 'a' ? 'winner' : (thirdPlaceMatch.winner === 'b' ? 'loser' : '')}`;
+  if (pA) {
+    rowA.innerHTML = `<span class="p-seed">–</span><span class="p-name">${pA.name}</span>${thirdPlaceMatch.winner === 'a' ? '<span class="p-crown">🥉</span>' : ''}`;
+    if (!thirdPlaceMatch.winner && pB) {
+      rowA.style.cursor = 'pointer';
+      rowA.addEventListener('click', () => { thirdPlaceMatch.winner = 'a'; renderThirdPlace(); renderResults(); });
+    } else if (thirdPlaceMatch.winner === 'a') {
+      rowA.addEventListener('click', () => { thirdPlaceMatch.winner = null; renderThirdPlace(); renderResults(); });
+    }
+  } else {
+    rowA.classList.add('tbd');
+    rowA.innerHTML = `<span class="p-seed">–</span><span class="p-name">TBD</span>`;
+  }
+  card.appendChild(rowA);
+
+  const div = document.createElement('div');
+  div.className = 'divider';
+  card.appendChild(div);
+
+  // Row B
+  const rowB = document.createElement('div');
+  rowB.className = `participant ${thirdPlaceMatch.winner === 'b' ? 'winner' : (thirdPlaceMatch.winner === 'a' ? 'loser' : '')}`;
+  if (pB) {
+    rowB.innerHTML = `<span class="p-seed">–</span><span class="p-name">${pB.name}</span>${thirdPlaceMatch.winner === 'b' ? '<span class="p-crown">🥉</span>' : ''}`;
+    if (!thirdPlaceMatch.winner && pA) {
+      rowB.style.cursor = 'pointer';
+      rowB.addEventListener('click', () => { thirdPlaceMatch.winner = 'b'; renderThirdPlace(); renderResults(); });
+    } else if (thirdPlaceMatch.winner === 'b') {
+      rowB.addEventListener('click', () => { thirdPlaceMatch.winner = null; renderThirdPlace(); renderResults(); });
+    }
+  } else {
+    rowB.classList.add('tbd');
+    rowB.innerHTML = `<span class="p-seed">–</span><span class="p-name">TBD</span>`;
+  }
+  card.appendChild(rowB);
+  section.appendChild(card);
+}
+
+// ─────────────────────────────────────────────
+//  RESULTS
+// ─────────────────────────────────────────────
+function renderResults() {
+  const { rounds, thirdPlaceMatch } = tournamentData;
+  const totalRounds = rounds.length;
+  const finalMatch = rounds[totalRounds - 1][0];
+  const panel = document.getElementById('results-panel');
+
+  const champ = finalMatch.winner ? resolveParticipant(finalMatch.winner === 'a' ? finalMatch.a : finalMatch.b, rounds) : null;
+  const runner = finalMatch.winner ? resolveParticipant(finalMatch.winner === 'a' ? finalMatch.b : finalMatch.a, rounds) : null;
+  const third = thirdPlaceMatch?.winner
+    ? (thirdPlaceMatch.winner === 'a'
+      ? resolveLoser(rounds[totalRounds - 2]?.[0], rounds)
+      : resolveLoser(rounds[totalRounds - 2]?.[1] || rounds[totalRounds - 2]?.[0], rounds))
+    : null;
+
+  if (!champ) { panel.style.display = 'none'; return; }
+  panel.style.display = 'block';
+
+  const podium = [
+    { medal: '🥇', label: 'Juara 1', name: champ?.name || '?' },
+    { medal: '🥈', label: 'Juara 2', name: runner?.name || '?' },
+    { medal: '🥉', label: 'Juara 3', name: third?.name || '(belum ditentukan)' },
+  ];
+
+  document.getElementById('podium-list').innerHTML = podium.map(p => `
+    <div class="podium-row">
+      <div class="podium-medal">${p.medal}</div>
+      <div>
+        <div style="font-size:10px;color:#888;font-family:'JetBrains Mono',monospace;">${p.label}</div>
+        <div class="podium-name">${p.name}</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Update champion card
+  const champName = document.getElementById('champ-name');
+  if (champName) champName.textContent = champ.name;
+}
+
+// ─────────────────────────────────────────────
+//  RESET
+// ─────────────────────────────────────────────
+document.getElementById('btn-reset').addEventListener('click', () => {
+  document.getElementById('bracket-screen').style.display = 'none';
+  document.getElementById('setup-screen').style.display = 'block';
+  document.getElementById('results-panel').style.display = 'none';
+});
+</script>
+</body>
+</html>
