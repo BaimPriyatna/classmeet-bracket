@@ -558,6 +558,44 @@ let tData = {};
 const countDisplay = document.getElementById('count-display');
 const pList = document.getElementById('participants-list');
 
+function saveState() {
+  const state = {
+    pCount,
+    eventName: document.getElementById('event-name').value,
+    participants: [],
+    tData,
+    screen: document.getElementById('bracket-screen').style.display === 'block' ? 'bracket' : 'setup'
+  };
+  for (let i = 1; i <= pCount; i++) {
+    const el = document.getElementById(`p-${i}`);
+    if (el) state.participants.push(el.value);
+  }
+  localStorage.setItem('bracket_state', JSON.stringify(state));
+}
+
+function loadState() {
+  const saved = localStorage.getItem('bracket_state');
+  if (!saved) return;
+  try {
+    const state = JSON.parse(saved);
+    pCount = state.pCount || 8;
+    document.getElementById('event-name').value = state.eventName || 'Futsal';
+    renderInputs();
+    state.participants.forEach((v, i) => {
+      const el = document.getElementById(`p-${i+1}`);
+      if (el) el.value = v;
+    });
+    tData = state.tData || {};
+    if (state.screen === 'bracket' && tData.rounds) {
+      document.getElementById('setup-screen').style.display = 'none';
+      document.getElementById('bracket-screen').style.display = 'block';
+      document.getElementById('display-event-name').textContent = tData.eventName;
+      document.getElementById('header-badge').textContent = tData.eventName.toUpperCase();
+      renderBracket();
+    }
+  } catch (e) { console.error("Failed to load state", e); }
+}
+
 function clamp(v, mn, mx) { return Math.max(mn, Math.min(mx, v)); }
 
 function renderInputs() {
@@ -566,13 +604,14 @@ function renderInputs() {
   for (let i = 1; i <= pCount; i++) {
     const w = document.createElement('div');
     w.className = 'p-input-wrap';
-    w.innerHTML = `<span class="p-num">${String(i).padStart(2, '0')}</span><input type="text" id="p-${i}" placeholder="Kelas ${i}">`;
+    w.innerHTML = `<span class="p-num">${String(i).padStart(2, '0')}</span><input type="text" id="p-${i}" placeholder="Kelas ${i}" oninput="saveState()">`;
     pList.appendChild(w);
   }
 }
 
-document.getElementById('btn-dec').onclick = () => { pCount = clamp(pCount - 1, 4, 16); renderInputs(); };
-document.getElementById('btn-inc').onclick = () => { pCount = clamp(pCount + 1, 4, 16); renderInputs(); };
+document.getElementById('event-name').oninput = saveState;
+document.getElementById('btn-dec').onclick = () => { pCount = clamp(pCount - 1, 4, 16); renderInputs(); saveState(); };
+document.getElementById('btn-inc').onclick = () => { pCount = clamp(pCount + 1, 4, 16); renderInputs(); saveState(); };
 document.getElementById('btn-start').onclick = () => {
   const ev = document.getElementById('event-name').value.trim() || 'Classmeet';
   const ps = [];
@@ -581,9 +620,11 @@ document.getElementById('btn-start').onclick = () => {
     ps.push(v || `Kelas ${i}`);
   }
   startTournament(ev, ps);
+  saveState();
 };
 
 renderInputs();
+loadState();
 
 function shuffle(arr) {
   const a = [...arr];
@@ -851,6 +892,7 @@ function buildQualSlot(p, side, qm, qi) {
       cascadeClearFromQual(qi);
       autoAdvance(tData.rounds, tData.qualMatches);
       renderBracket();
+      saveState();
     });
   } else if (isWinner) {
     row.classList.add('decided');
@@ -859,6 +901,7 @@ function buildQualSlot(p, side, qm, qi) {
       cascadeClearFromQual(qi);
       autoAdvance(tData.rounds, tData.qualMatches);
       renderBracket();
+      saveState();
     });
   }
   return row;
@@ -924,6 +967,7 @@ function buildSlot(p, side, match, rIdx, mIdx, pA, pB) {
       cascadeClear(rIdx, mIdx);
       autoAdvance(rounds, qualMatches);
       renderBracket();
+      saveState();
     });
   } else if (isWinner) {
     row.classList.add('decided');
@@ -932,6 +976,7 @@ function buildSlot(p, side, match, rIdx, mIdx, pA, pB) {
       cascadeClear(rIdx, mIdx);
       autoAdvance(rounds, qualMatches);
       renderBracket();
+      saveState();
     });
   }
   return row;
@@ -1025,10 +1070,10 @@ function renderThird() {
     row.innerHTML = `<span class="p-seed">–</span><span class="p-name">${p.name}</span>${isW ? '<span class="p-icon">🥉</span>' : ''}`;
     if (!thirdPlaceMatch.winner && opp) {
       row.style.cursor = 'pointer';
-      row.addEventListener('click', () => { thirdPlaceMatch.winner = side; renderBracket(); });
+      row.addEventListener('click', () => { thirdPlaceMatch.winner = side; renderBracket(); saveState(); });
     } else if (isW) {
       row.classList.add('decided');
-      row.addEventListener('click', () => { thirdPlaceMatch.winner = null; renderBracket(); });
+      row.addEventListener('click', () => { thirdPlaceMatch.winner = null; renderBracket(); saveState(); });
     }
     return row;
   };
@@ -1075,9 +1120,9 @@ function renderResults() {
 }
 
 document.getElementById('btn-reset').addEventListener('click', () => {
-  document.getElementById('bracket-screen').style.display = 'none';
-  document.getElementById('setup-screen').style.display = 'block';
-  document.getElementById('header-badge').textContent = 'SETUP';
+  if (!confirm('Apakah Anda yakin ingin mengatur ulang bracket? Semua data akan dihapus.')) return;
+  localStorage.removeItem('bracket_state');
+  location.reload();
 });
 </script>
 
