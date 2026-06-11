@@ -591,6 +591,7 @@ function loadState() {
       document.getElementById('bracket-screen').style.display = 'block';
       document.getElementById('display-event-name').textContent = tData.eventName;
       document.getElementById('header-badge').textContent = tData.eventName.toUpperCase();
+      autoAdvance(tData.rounds, tData.qualMatches);
       renderBracket();
     }
   } catch (e) { console.error("Failed to load state", e); }
