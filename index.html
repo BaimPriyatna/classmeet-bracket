@@ -4,746 +4,886 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bracket Classmeet – SMKN Batujaya</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --black: #111111;
-    --white: #FFFFFF;
-    --yellow: #FFD600;
-    --pink: #FF6B6B;
-    --teal: #4ECDC4;
-    --purple: #A78BFA;
-    --green: #6BCB77;
-    --orange: #FF9F1C;
-    --shadow: 4px 4px 0px var(--black);
-    --shadow-lg: 6px 6px 0px var(--black);
-    --radius: 14px;
-    --border: 2.5px solid var(--black);
-  }
+:root {
+  --bg:        #0D0F1A;
+  --surface:   #151825;
+  --card:      #1C2033;
+  --border:    #2A2F48;
+  --yellow:    #F5F500;
+  --red:       #FF3D5A;
+  --mint:      #00E5B0;
+  --blue:      #4D8BFF;
+  --white:     #F0F2FF;
+  --muted:     #6B7299;
+  --r16-accent: #4D8BFF;
+  --qf-accent:  #A78BFA;
+  --sf-accent:  #00E5B0;
+  --f-accent:   #F5F500;
+  --3rd-accent: #FF3D5A;
+}
 
-  body {
-    font-family: 'Space Grotesk', sans-serif;
-    background: #F0EFEB;
-    min-height: 100vh;
-    color: var(--black);
-  }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--white);
+  overflow-x: hidden;
+}
 
-  /* ─── HEADER ─── */
-  .site-header {
-    background: var(--black);
-    color: var(--yellow);
-    padding: 18px 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    border-bottom: 4px solid var(--yellow);
-  }
-  .site-header .logo {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -1px;
-  }
-  .site-header .logo span { color: var(--pink); }
-  .site-header .sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 2px;
-  }
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon {
+  width: 36px; height: 36px;
+  background: var(--yellow);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.logo-text .name {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+}
+.logo-text .sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.header-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: var(--muted);
+}
 
-  /* ─── SETUP SCREEN ─── */
-  #setup-screen {
-    max-width: 620px;
-    margin: 48px auto;
-    padding: 0 20px;
-  }
-  .setup-card {
-    background: var(--white);
-    border: var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-    padding: 32px;
-  }
-  .setup-card h2 {
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .setup-card h2 .badge {
-    background: var(--yellow);
-    border: var(--border);
-    border-radius: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    padding: 2px 8px;
-    font-weight: 700;
-  }
-  .field-group { margin-bottom: 20px; }
-  .field-group label {
-    display: block;
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .field-group input, .field-group select {
-    width: 100%;
-    padding: 10px 14px;
-    border: var(--border);
-    border-radius: 10px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    background: #FAFAFA;
-    outline: none;
-    transition: box-shadow .15s;
-  }
-  .field-group input:focus, .field-group select:focus {
-    box-shadow: var(--shadow);
-    background: var(--white);
-  }
+#setup-screen {
+  max-width: 480px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+.setup-hero {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.setup-hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(24px, 6vw, 36px);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.setup-hero h1 span { color: var(--yellow); }
+.setup-hero p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 8px;
+}
+.setup-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+.field-group { margin-bottom: 18px; }
+.field-group label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+.field-group input, .field-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  background: var(--card);
+  color: var(--white);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.field-group input::placeholder { color: var(--muted); }
+.field-group input:focus {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(245,245,0,.08);
+}
+.count-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.count-btn {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, border-color .15s;
+  flex-shrink: 0;
+}
+.count-btn:hover { background: var(--border); border-color: var(--yellow); color: var(--yellow); }
+.count-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--yellow);
+  min-width: 32px;
+  text-align: center;
+}
+.count-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+#participants-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+.p-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  transition: border-color .15s;
+}
+.p-input-wrap:focus-within { border-color: var(--blue); }
+.p-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  min-width: 20px;
+}
+.p-input-wrap input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+  outline: none;
+  padding: 0;
+  min-width: 0;
+}
+.p-input-wrap input::placeholder { color: var(--muted); font-size: 12px; }
+.btn-start {
+  width: 100%;
+  padding: 14px;
+  background: var(--yellow);
+  color: #0D0F1A;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: opacity .15s, transform .1s;
+  letter-spacing: 0.3px;
+}
+.btn-start:hover { opacity: .9; }
+.btn-start:active { transform: scale(.98); }
 
-  .participant-count-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .count-btn {
-    width: 36px; height: 36px;
-    border: var(--border);
-    border-radius: 8px;
-    background: var(--yellow);
-    font-size: 20px;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 3px 3px 0 var(--black);
-    transition: transform .1s, box-shadow .1s;
-    display: flex; align-items: center; justify-content: center;
-    line-height: 1;
-  }
-  .count-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--black); }
-  .count-display {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 22px;
-    font-weight: 700;
-    min-width: 36px;
-    text-align: center;
-  }
+#bracket-screen { display: none; padding: 16px; }
+.bracket-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+.bracket-info .event-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(16px, 4vw, 22px);
+  font-weight: 800;
+  line-height: 1;
+}
+.bracket-info .event-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(245,245,0,.1);
+  border: 1px solid rgba(245,245,0,.2);
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--yellow);
+  padding: 3px 10px;
+  margin-top: 5px;
+}
+.btn-reset {
+  padding: 9px 16px;
+  background: var(--surface);
+  color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color .15s;
+}
+.btn-reset:hover { border-color: var(--muted); }
 
-  #participants-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
-  .participant-input-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .participant-input-row .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 700;
-    min-width: 26px;
-    color: #888;
-  }
-  .participant-input-row input {
-    flex: 1;
-    padding: 8px 12px;
-    border: var(--border);
-    border-radius: 8px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    background: #FAFAFA;
-    outline: none;
-  }
-  .participant-input-row input:focus {
-    box-shadow: 3px 3px 0 var(--black);
-    background: var(--white);
-  }
+.bracket-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.bracket-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  min-width: max-content;
+  padding-bottom: 8px;
+}
 
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 28px;
-    background: var(--black);
-    color: var(--yellow);
-    border: var(--border);
-    border-radius: 12px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: var(--shadow-lg);
-    transition: transform .1s, box-shadow .1s;
-    margin-top: 12px;
-  }
-  .btn-primary:hover { background: #222; }
-  .btn-primary:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 var(--black); }
-
-  /* ─── BRACKET SCREEN ─── */
-  #bracket-screen { display: none; padding: 20px; }
-
-  .bracket-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .bracket-title h1 {
-    font-size: clamp(18px, 3vw, 28px);
-    font-weight: 800;
-    line-height: 1.1;
-  }
-  .bracket-title .event-tag {
-    display: inline-block;
-    background: var(--pink);
-    border: var(--border);
-    border-radius: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 3px 10px;
-    margin-top: 6px;
-  }
-  .btn-reset {
-    padding: 10px 20px;
-    background: var(--white);
-    border: var(--border);
-    border-radius: 10px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: transform .1s, box-shadow .1s;
-  }
-  .btn-reset:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--black); }
-
-  /* ─── BRACKET LAYOUT ─── */
-  .bracket-container {
-    overflow-x: auto;
-    padding-bottom: 24px;
-  }
+@media (max-width: 700px) {
+  .bracket-wrap { overflow-x: visible; }
   .bracket-layout {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
+    min-width: unset;
     gap: 0;
-    min-width: max-content;
   }
-
   .round-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .round-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 5px 10px;
-    border: var(--border);
-    border-radius: 6px;
-    margin-bottom: 10px;
-    white-space: nowrap;
-  }
-
-  /* Round colors */
-  .round-r16 .round-label  { background: #E8F4FD; }
-  .round-qf  .round-label  { background: #E8FDF4; }
-  .round-sf  .round-label  { background: var(--yellow); }
-  .round-f   .round-label  { background: var(--pink); color: var(--white); }
-  .round-3rd .round-label  { background: #EDE9FE; }
-
-  .matches-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 0;
-  }
-
-  /* ─── CONNECTOR LINES ─── */
-  .connector {
-    display: flex;
-    align-items: center;
-  }
-  .connector svg { display: block; }
-
-  /* ─── MATCH CARD ─── */
-  .match-wrapper {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
-  .match-card {
-    width: 170px;
-    border: var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    background: var(--white);
-    flex-shrink: 0;
-  }
-  .match-card .match-id {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 3px 8px;
-    background: var(--black);
-    color: #aaa;
-  }
-  .match-card .participant {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 10px;
-    cursor: pointer;
-    transition: background .15s;
-    border-top: 2px solid transparent;
-    min-height: 38px;
-    position: relative;
-  }
-  .match-card .participant:hover { background: #F5F5F5; }
-  .match-card .participant.winner {
-    background: var(--yellow) !important;
-    font-weight: 800;
-  }
-  .match-card .participant.loser { opacity: 0.45; }
-  .match-card .participant.tbd { color: #aaa; font-style: italic; cursor: default; }
-  .match-card .p-seed {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    color: #999;
-    min-width: 16px;
-  }
-  .match-card .p-name {
-    font-size: 13px;
-    font-weight: 700;
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .match-card .p-crown { font-size: 12px; margin-left: auto; }
-  .match-card .divider {
-    height: 2px;
-    background: var(--black);
-    opacity: 0.08;
-  }
-
-  /* Round accent bar */
-  .round-r16 .match-card  { border-left: 5px solid #90CAF9; }
-  .round-qf  .match-card  { border-left: 5px solid var(--teal); }
-  .round-sf  .match-card  { border-left: 5px solid var(--orange); }
-  .round-f   .match-card  { border-left: 5px solid var(--pink); }
-  .round-3rd .match-card  { border-left: 5px solid var(--purple); }
-
-  /* ─── CHAMPION CARD ─── */
-  .champion-card {
-    background: var(--black);
-    border: var(--border);
-    border-radius: 14px;
-    box-shadow: var(--shadow-lg);
-    padding: 16px 20px;
-    text-align: center;
-    min-width: 160px;
-  }
-  .champion-card .trophy { font-size: 28px; }
-  .champion-card .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--yellow);
-    font-weight: 700;
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .champion-card .name {
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--white);
-    margin-top: 4px;
-    min-height: 24px;
-  }
-
-  /* ─── THIRD PLACE ─── */
-  .third-place-section {
-    margin-top: 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    width: 100%;
+    flex-direction: row !important;
     flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
   }
-  .third-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    background: var(--purple);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 4px 12px;
-  }
-
-  /* ─── RESULTS PANEL ─── */
-  .results-panel {
-    margin-top: 32px;
-    display: none;
-    background: var(--black);
-    border: var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    color: var(--white);
-    max-width: 400px;
-  }
-  .results-panel h3 {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--yellow);
-    margin-bottom: 16px;
-  }
-  .podium-row {
+  .round-label-wrap {
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid #333;
+    gap: 10px;
+    margin-bottom: 10px;
   }
-  .podium-row:last-child { border-bottom: none; }
-  .podium-medal { font-size: 22px; min-width: 32px; }
-  .podium-name { font-size: 16px; font-weight: 700; }
+  .matches-col {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px !important;
+    width: 100%;
+    justify-content: unset !important;
+  }
+  .connector-col { display: none !important; }
+  .champ-connector { display: none !important; }
+  .round-col.champ-col {
+    justify-content: center;
+    border-bottom: none;
+  }
+}
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 600px) {
-    .match-card { width: 140px; }
-    .match-card .p-name { font-size: 11px; }
-  }
+.round-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.round-label-wrap { margin-bottom: 10px; }
+.round-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  border: 1px solid;
+}
+.round-r16 .round-label { background: rgba(77,139,255,.12); border-color: rgba(77,139,255,.3); color: var(--r16-accent); }
+.round-qf  .round-label { background: rgba(167,139,250,.12); border-color: rgba(167,139,250,.3); color: var(--qf-accent); }
+.round-sf  .round-label { background: rgba(0,229,176,.12); border-color: rgba(0,229,176,.3); color: var(--sf-accent); }
+.round-f   .round-label { background: rgba(245,245,0,.12); border-color: rgba(245,245,0,.3); color: var(--f-accent); }
+.round-3rd .round-label { background: rgba(255,61,90,.12); border-color: rgba(255,61,90,.3); color: var(--3rd-accent); }
+
+.matches-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.match-wrapper { position: relative; }
+.match-card {
+  width: 168px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+.match-card .match-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  padding: 4px 10px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.match-card .slot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background .15s;
+  min-height: 38px;
+}
+.match-card .slot:hover:not(.tbd):not(.decided) { background: rgba(255,255,255,.05); }
+.match-card .slot.winner { background: rgba(245,245,0,.08); }
+.match-card .slot.winner .p-name { color: var(--yellow); font-weight: 600; }
+.match-card .slot.loser { opacity: .35; }
+.match-card .slot.tbd { cursor: default; }
+.match-card .slot.decided { cursor: pointer; }
+
+.slot .p-seed {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  min-width: 16px;
+}
+.slot .p-name {
+  font-size: 13px;
+  font-weight: 500;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--white);
+}
+.slot .p-icon { font-size: 11px; }
+.divider { height: 1px; background: var(--border); flex-shrink: 0; }
+
+.round-r16 .match-card { border-left: 3px solid var(--r16-accent); }
+.round-qf  .match-card { border-left: 3px solid var(--qf-accent); }
+.round-sf  .match-card { border-left: 3px solid var(--sf-accent); }
+.round-f   .match-card { border-left: 3px solid var(--f-accent); }
+.round-3rd .match-card { border-left: 3px solid var(--3rd-accent); }
+
+.connector-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+}
+.champ-connector {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.champion-box {
+  background: var(--surface);
+  border: 1px solid rgba(245,245,0,.25);
+  border-radius: 14px;
+  padding: 18px 16px;
+  text-align: center;
+  width: 148px;
+  box-shadow: 0 0 32px rgba(245,245,0,.06);
+}
+.champion-box .trophy-icon { font-size: 30px; line-height: 1; margin-bottom: 6px; }
+.champion-box .champ-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.champion-box .champ-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--white);
+  margin-top: 4px;
+  min-height: 22px;
+  word-break: break-word;
+}
+
+#third-place-section {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.third-label-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255,61,90,.12);
+  border: 1px solid rgba(255,61,90,.3);
+  color: var(--3rd-accent);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+#results-panel {
+  display: none;
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 360px;
+}
+#results-panel h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--yellow);
+  margin-bottom: 16px;
+}
+.podium-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.podium-item:last-child { border-bottom: none; }
+.podium-item .medal { font-size: 20px; }
+.podium-item .pos {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+.podium-item .pname { font-size: 15px; font-weight: 600; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="site-header">
-  <div>
-    <div class="logo">SMKN <span>Batujaya</span></div>
-    <div class="sub">CLASS MEET TOURNAMENT BRACKET</div>
+  <div class="logo-mark">
+    <div class="logo-icon">🏆</div>
+    <div class="logo-text">
+      <div class="name">SMKN Batujaya</div>
+      <div class="sub">CLASS MEET BRACKET</div>
+    </div>
   </div>
+  <div class="header-badge" id="header-badge">SETUP</div>
 </header>
 
-<!-- SETUP SCREEN -->
 <div id="setup-screen">
+  <div class="setup-hero">
+    <h1>Buat <span>Bracket</span><br>Turnamen</h1>
+    <p>Isi data peserta, lalu mulai pertandingan</p>
+  </div>
   <div class="setup-card">
-    <h2>⚙️ Setup Turnamen <span class="badge">STEP 1</span></h2>
-
     <div class="field-group">
       <label>Nama Lomba</label>
-      <input type="text" id="event-name" value="Futsal" placeholder="cth: Futsal, Badminton, Tenis Meja…">
+      <input type="text" id="event-name" value="Futsal" placeholder="cth: Futsal, Badminton…">
     </div>
-
     <div class="field-group">
       <label>Jumlah Peserta</label>
-      <div class="participant-count-row">
+      <div class="count-row">
         <button class="count-btn" id="btn-dec">−</button>
         <span class="count-display" id="count-display">8</span>
         <button class="count-btn" id="btn-inc">+</button>
-        <span style="font-size:13px;color:#888;font-family:'JetBrains Mono',monospace;">/ 4–16</span>
+        <span class="count-hint">4–16 tim</span>
       </div>
     </div>
-
     <div class="field-group">
       <label>Nama Peserta</label>
       <div id="participants-list"></div>
     </div>
-
-    <button class="btn-primary" id="btn-start">🚀 Mulai Bracket</button>
+    <button class="btn-start" id="btn-start">Mulai Bracket →</button>
   </div>
 </div>
 
-<!-- BRACKET SCREEN -->
 <div id="bracket-screen">
-  <div class="bracket-header">
-    <div class="bracket-title">
-      <h1>🏆 Bracket Classmeet<br>SMKN Batujaya</h1>
-      <div class="event-tag" id="display-event-name">Futsal</div>
+  <div class="bracket-topbar">
+    <div class="bracket-info">
+      <div class="event-name" id="display-event-name">Futsal</div>
+      <div class="event-pill">🏅 SMKN Batujaya · Classmeet</div>
     </div>
     <button class="btn-reset" id="btn-reset">← Atur Ulang</button>
   </div>
-
-  <div class="bracket-container">
+  <div class="bracket-wrap">
     <div class="bracket-layout" id="bracket-layout"></div>
   </div>
-
-  <div class="third-place-section" id="third-place-section"></div>
-
-  <div class="results-panel" id="results-panel">
-    <h3>🎖️ Hasil Akhir</h3>
+  <div id="third-place-section"></div>
+  <div id="results-panel">
+    <h3>Hasil Akhir</h3>
     <div id="podium-list"></div>
   </div>
 </div>
-
 <script>
-// ─────────────────────────────────────────────
-//  STATE
-// ─────────────────────────────────────────────
-let participantCount = 8;
-let tournamentData = {};
+let pCount = 8;
+let tData = {};
 
-// ─────────────────────────────────────────────
-//  SETUP SCREEN LOGIC
-// ─────────────────────────────────────────────
 const countDisplay = document.getElementById('count-display');
-const participantsList = document.getElementById('participants-list');
+const pList = document.getElementById('participants-list');
 
-function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+function clamp(v, mn, mx) { return Math.max(mn, Math.min(mx, v)); }
 
-function renderParticipantInputs() {
-  countDisplay.textContent = participantCount;
-  participantsList.innerHTML = '';
-  for (let i = 1; i <= participantCount; i++) {
-    const row = document.createElement('div');
-    row.className = 'participant-input-row';
-    row.innerHTML = `
-      <span class="num">#${String(i).padStart(2,'0')}</span>
-      <input type="text" id="p-${i}" placeholder="Peserta ${i}" value="">
-    `;
-    participantsList.appendChild(row);
+function renderInputs() {
+  countDisplay.textContent = pCount;
+  pList.innerHTML = '';
+  for (let i = 1; i <= pCount; i++) {
+    const w = document.createElement('div');
+    w.className = 'p-input-wrap';
+    w.innerHTML = `<span class="p-num">${String(i).padStart(2, '0')}</span><input type="text" id="p-${i}" placeholder="Kelas ${i}">`;
+    pList.appendChild(w);
   }
 }
 
-document.getElementById('btn-dec').addEventListener('click', () => {
-  participantCount = clamp(participantCount - 1, 4, 16);
-  renderParticipantInputs();
-});
-document.getElementById('btn-inc').addEventListener('click', () => {
-  participantCount = clamp(participantCount + 1, 4, 16);
-  renderParticipantInputs();
-});
-
-document.getElementById('btn-start').addEventListener('click', () => {
-  const eventName = document.getElementById('event-name').value.trim() || 'Classmeet';
-  const participants = [];
-  for (let i = 1; i <= participantCount; i++) {
-    const val = document.getElementById(`p-${i}`).value.trim();
-    participants.push(val || `Peserta ${i}`);
+document.getElementById('btn-dec').onclick = () => { pCount = clamp(pCount - 1, 4, 16); renderInputs(); };
+document.getElementById('btn-inc').onclick = () => { pCount = clamp(pCount + 1, 4, 16); renderInputs(); };
+document.getElementById('btn-start').onclick = () => {
+  const ev = document.getElementById('event-name').value.trim() || 'Classmeet';
+  const ps = [];
+  for (let i = 1; i <= pCount; i++) {
+    const v = document.getElementById(`p-${i}`).value.trim();
+    ps.push(v || `Kelas ${i}`);
   }
-  startTournament(eventName, participants);
-});
+  startTournament(ev, ps);
+};
 
-renderParticipantInputs();
+renderInputs();
 
-// ─────────────────────────────────────────────
-//  BRACKET LOGIC
-// ─────────────────────────────────────────────
-
-// Returns next power-of-2 >= n
-function nextPow2(n) {
-  let p = 1;
-  while (p < n) p *= 2;
-  return p;
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
-function buildBracket(participants) {
-  const n = participants.length;
-  const slots = nextPow2(n); // bracket size
-  const byes = slots - n;
+function nextPow2(n) { let p = 1; while (p < n) p *= 2; return p; }
 
-  // Seed participants + byes
-  const seeded = [];
-  for (let i = 0; i < slots; i++) {
-    seeded.push(i < n ? { name: participants[i], seed: i + 1 } : null); // null = bye
+function buildBracket(ps) {
+  const shuffled = shuffle(ps);
+  const n = shuffled.length;
+  const slots = nextPow2(n);
+  const byeCount = slots - n;
+  const qualCount = n - byeCount;
+
+  const qualPlayers = shuffled.slice(n - qualCount);
+  const directSeeded = shuffled.slice(0, n - qualCount);
+
+  const qualMatches = [];
+  for (let i = 0; i < qualPlayers.length; i += 2) {
+    qualMatches.push({
+      id: `KUA-${qualMatches.length + 1}`,
+      a: { name: qualPlayers[i], seed: n - qualCount + i + 1 },
+      b: { name: qualPlayers[i + 1], seed: n - qualCount + i + 2 },
+      winner: null,
+      isQual: true
+    });
   }
 
-  // Build rounds
-  // rounds[0] = R16/R8/R4, etc.
+  const mainSlots = [];
+  directSeeded.forEach((p, i) => {
+    mainSlots.push({ name: p, seed: i + 1 });
+  });
+  qualMatches.forEach((_, i) => {
+    mainSlots.push({ fromQual: i });
+  });
+
   const rounds = [];
-  let currentSlots = seeded;
-
-  while (currentSlots.length > 1) {
-    const matches = [];
-    for (let i = 0; i < currentSlots.length; i += 2) {
-      const a = currentSlots[i];
-      const b = currentSlots[i + 1];
-      const match = {
-        id: `M${rounds.length + 1}-${matches.length + 1}`,
-        a: a, // participant obj or null(bye) or {fromMatch, side}
-        b: b,
+  let cur = mainSlots;
+  while (cur.length > 1) {
+    const m = [];
+    for (let i = 0; i < cur.length; i += 2) {
+      m.push({
+        id: `M${rounds.length + 1}-${m.length + 1}`,
+        a: cur[i],
+        b: cur[i + 1],
         winner: null,
-        roundIdx: rounds.length,
-      };
-      // Auto-advance bye
-      if (a && !b) match.winner = 'a';
-      if (!a && b) match.winner = 'b';
-      if (!a && !b) match.winner = 'a'; // edge case
-      matches.push(match);
+        roundIdx: rounds.length
+      });
     }
-    rounds.push(matches);
-    // Next round placeholders
-    currentSlots = matches.map((_, idx) => ({ fromMatch: rounds.length - 1, matchIdx: idx }));
+    rounds.push(m);
+    cur = m.map((_, i) => ({ fromMatch: rounds.length - 1, matchIdx: i }));
   }
 
-  return rounds;
+  return { rounds, qualMatches };
 }
 
-function getRoundName(roundIdx, totalRounds) {
-  const fromEnd = totalRounds - 1 - roundIdx;
-  if (fromEnd === 0) return 'Final';
-  if (fromEnd === 1) return 'Semifinal';
-  if (fromEnd === 2) return 'Perempat Final';
-  if (fromEnd === 3) return '16 Besar';
-  return `Babak ${roundIdx + 1}`;
+function resolve(slot, rounds, qualMatches) {
+  if (!slot) return null;
+  if (slot.name) return slot;
+  if (slot.fromQual !== undefined) {
+    const qm = qualMatches[slot.fromQual];
+    if (!qm || !qm.winner) return null;
+    return qm.winner === 'a' ? qm.a : qm.b;
+  }
+  if (slot.fromMatch !== undefined) {
+    const m = rounds[slot.fromMatch][slot.matchIdx];
+    if (!m || !m.winner) return null;
+    return resolve(m.winner === 'a' ? m.a : m.b, rounds, qualMatches);
+  }
+  return null;
 }
 
-function getRoundClass(roundIdx, totalRounds) {
-  const fromEnd = totalRounds - 1 - roundIdx;
-  if (fromEnd === 0) return 'round-f';
-  if (fromEnd === 1) return 'round-sf';
-  if (fromEnd === 2) return 'round-qf';
+function resolveLoser(m, rounds, qualMatches) {
+  if (!m || !m.winner) return null;
+  return resolve(m.winner === 'a' ? m.b : m.a, rounds, qualMatches);
+}
+
+function autoAdvance(rounds, qualMatches) {
+  for (let r = 0; r < rounds.length; r++) {
+    for (let m of rounds[r]) {
+      if (m.winner !== null) continue;
+      const rA = resolve(m.a, rounds, qualMatches);
+      const rB = resolve(m.b, rounds, qualMatches);
+      if (rA && !rB) m.winner = 'a';
+      else if (!rA && rB) m.winner = 'b';
+    }
+  }
+}
+
+function roundName(idx, total) {
+  const fe = total - 1 - idx;
+  if (fe === 0) return 'Final';
+  if (fe === 1) return 'Semifinal';
+  if (fe === 2) return 'Perempat Final';
+  if (fe === 3) return '16 Besar';
+  return `Babak ${idx + 1}`;
+}
+
+function roundClass(idx, total) {
+  const fe = total - 1 - idx;
+  if (fe === 0) return 'round-f';
+  if (fe === 1) return 'round-sf';
+  if (fe === 2) return 'round-qf';
   return 'round-r16';
 }
 
-// Resolve participant name for a match slot
-function resolveParticipant(slot, rounds) {
-  if (!slot) return null;
-  if (slot.name) return slot; // direct participant
-  if (slot.seed) return slot;
-  // from match
-  const { fromMatch, matchIdx } = slot;
-  const match = rounds[fromMatch][matchIdx];
-  if (!match.winner) return null; // TBD
-  const winnerSlot = match.winner === 'a' ? match.a : match.b;
-  return resolveParticipant(winnerSlot, rounds);
-}
-
-function resolveLoser(match, rounds) {
-  if (!match.winner) return null;
-  const loserSlot = match.winner === 'a' ? match.b : match.a;
-  return resolveParticipant(loserSlot, rounds);
-}
-
-// ─────────────────────────────────────────────
-//  START TOURNAMENT
-// ─────────────────────────────────────────────
-function startTournament(eventName, participants) {
-  const rounds = buildBracket(participants);
-
-  // 3rd place match uses losers of SF
-  let thirdPlaceMatch = null;
-  const totalRounds = rounds.length;
-  if (totalRounds >= 2) {
-    const sfMatches = rounds[totalRounds - 2];
-    thirdPlaceMatch = {
-      id: '3RD',
-      sfA: { roundIdx: totalRounds - 2, matchIdx: 0 },
-      sfB: { roundIdx: totalRounds - 2, matchIdx: sfMatches.length > 1 ? 1 : 0 },
-      winner: null,
-      roundIdx: -1,
-    };
+function startTournament(ev, ps) {
+  const { rounds, qualMatches } = buildBracket(ps);
+  autoAdvance(rounds, qualMatches);
+  const total = rounds.length;
+  let tpm = null;
+  if (total >= 2) {
+    const sf = rounds[total - 2];
+    tpm = { id: '3RD', sfA: { ri: total - 2, mi: 0 }, sfB: { ri: total - 2, mi: sf.length > 1 ? 1 : 0 }, winner: null };
   }
-
-  tournamentData = { rounds, thirdPlaceMatch, eventName, participants };
-
+  tData = { rounds, qualMatches, thirdPlaceMatch: tpm, eventName: ev };
   document.getElementById('setup-screen').style.display = 'none';
   document.getElementById('bracket-screen').style.display = 'block';
-  document.getElementById('display-event-name').textContent = eventName;
-
+  document.getElementById('display-event-name').textContent = ev;
+  document.getElementById('header-badge').textContent = ev.toUpperCase();
   renderBracket();
 }
 
-// ─────────────────────────────────────────────
-//  RENDER BRACKET
-// ─────────────────────────────────────────────
+const MATCH_H = 82;
+const LABEL_OFFSET = 36;
+
+function gapForRound(rIdx) {
+  const { rounds } = tData;
+  const firstCount = rounds[0].length;
+  const thisCount = rounds[rIdx].length;
+  if (thisCount <= 1) return 0;
+  const totalH = firstCount * (MATCH_H + 8);
+  return Math.max(8, (totalH / thisCount) - MATCH_H);
+}
+
 function renderBracket() {
-  const { rounds, thirdPlaceMatch } = tournamentData;
-  const totalRounds = rounds.length;
+  const { rounds, qualMatches, thirdPlaceMatch } = tData;
+  const total = rounds.length;
+  autoAdvance(rounds, qualMatches);
+
   const layout = document.getElementById('bracket-layout');
   layout.innerHTML = '';
 
-  rounds.forEach((matches, rIdx) => {
-    const roundClass = getRoundClass(rIdx, totalRounds);
-    const roundName = getRoundName(rIdx, totalRounds);
+  if (qualMatches && qualMatches.length > 0) {
+    const qualCol = document.createElement('div');
+    qualCol.className = 'round-col round-r16';
 
-    // Connector before (except first round)
+    const lw = document.createElement('div');
+    lw.className = 'round-label-wrap';
+    const lbl = document.createElement('div');
+    lbl.className = 'round-label';
+    lbl.textContent = 'Kualifikasi';
+    lw.appendChild(lbl);
+    qualCol.appendChild(lw);
+
+    const mc = document.createElement('div');
+    mc.className = 'matches-col';
+    mc.style.gap = '8px';
+
+    qualMatches.forEach((qm, qi) => {
+      mc.appendChild(buildQualCard(qm, qi));
+    });
+    qualCol.appendChild(mc);
+    layout.appendChild(qualCol);
+
+    const conn = document.createElement('div');
+    conn.className = 'champ-connector';
+    conn.innerHTML = `<svg width="24" height="4"><line x1="0" y1="2" x2="24" y2="2" stroke="#2A2F48" stroke-width="1.5"/></svg>`;
+    layout.appendChild(conn);
+  }
+
+  rounds.forEach((matches, rIdx) => {
+    const rc = roundClass(rIdx, total);
+    const rn = roundName(rIdx, total);
+
     if (rIdx > 0) {
-      const prevMatches = rounds[rIdx - 1].length;
-      const currMatches = matches.length;
-      const connectorCol = buildConnectors(prevMatches, currMatches, rIdx);
-      layout.appendChild(connectorCol);
+      const conn = buildConnectors(rounds[rIdx - 1].length, matches.length, rIdx);
+      layout.appendChild(conn);
     }
 
     const col = document.createElement('div');
-    col.className = `round-col ${roundClass}`;
+    col.className = `round-col ${rc}`;
 
-    const label = document.createElement('div');
-    label.className = 'round-label';
-    label.textContent = roundName;
-    col.appendChild(label);
+    const lw = document.createElement('div');
+    lw.className = 'round-label-wrap';
+    const lbl = document.createElement('div');
+    lbl.className = 'round-label';
+    lbl.textContent = rn;
+    lw.appendChild(lbl);
+    col.appendChild(lw);
 
-    const matchesCol = document.createElement('div');
-    matchesCol.className = 'matches-col';
-    matchesCol.style.gap = getMatchGap(rIdx, totalRounds, rounds[0].length) + 'px';
+    const mc = document.createElement('div');
+    mc.className = 'matches-col';
+    mc.style.gap = gapForRound(rIdx) + 'px';
 
-    matches.forEach((match, mIdx) => {
-      const card = buildMatchCard(match, rIdx, mIdx);
-      matchesCol.appendChild(card);
+    matches.forEach((m, mIdx) => {
+      mc.appendChild(buildCard(m, rIdx, mIdx));
     });
-
-    col.appendChild(matchesCol);
+    col.appendChild(mc);
     layout.appendChild(col);
   });
 
-  // Champion
-  const finalMatch = rounds[totalRounds - 1][0];
-  const champion = finalMatch.winner ? resolveParticipant(
-    finalMatch.winner === 'a' ? finalMatch.a : finalMatch.b, rounds
-  ) : null;
+  const cc = document.createElement('div');
+  cc.className = 'champ-connector';
+  cc.innerHTML = `<svg width="24" height="4"><line x1="0" y1="2" x2="24" y2="2" stroke="#2A2F48" stroke-width="1.5"/></svg>`;
+  layout.appendChild(cc);
 
-  const champConnector = buildChampConnector();
-  layout.appendChild(champConnector);
+  const fm = rounds[total - 1][0];
+  const champ = fm.winner ? resolve(fm.winner === 'a' ? fm.a : fm.b, rounds, qualMatches) : null;
 
-  const champCard = document.createElement('div');
-  champCard.className = 'round-col';
-  champCard.innerHTML = `
-    <div class="round-label" style="background:var(--yellow)">Juara</div>
-    <div class="champion-card">
-      <div class="trophy">🏆</div>
-      <div class="label">Juara 1</div>
-      <div class="name" id="champ-name">${champion ? champion.name : '?'}</div>
+  const champCol = document.createElement('div');
+  champCol.className = 'round-col champ-col';
+  champCol.innerHTML = `
+    <div class="round-label-wrap"><div class="round-label" style="background:rgba(245,245,0,.12);border-color:rgba(245,245,0,.3);color:var(--yellow)">Juara</div></div>
+    <div class="champion-box">
+      <div class="trophy-icon">🏆</div>
+      <div class="champ-label">Juara 1</div>
+      <div class="champ-name" id="champ-name">${champ ? champ.name : '?'}</div>
     </div>
   `;
-  layout.appendChild(champCard);
+  layout.appendChild(champCol);
 
-  // 3rd place
-  renderThirdPlace();
+  renderThird();
   renderResults();
 }
 
-function getMatchGap(rIdx, totalRounds, firstRoundCount) {
-  // Gap grows as rounds shrink
-  const baseH = 80; // match card height estimate
-  const firstCount = firstRoundCount;
-  const thisCount = Math.ceil(firstCount / Math.pow(2, rIdx));
-  if (thisCount <= 1) return 0;
-  const totalH = firstCount * (baseH + 8);
-  return Math.max(8, (totalH / thisCount) - baseH - 8);
+function buildQualCard(qm, qi) {
+  const wrap = document.createElement('div');
+  wrap.className = 'match-wrapper';
+  const card = document.createElement('div');
+  card.className = 'match-card round-r16';
+
+  const idBar = document.createElement('div');
+  idBar.className = 'match-id';
+  idBar.textContent = qm.id;
+  card.appendChild(idBar);
+
+  card.appendChild(buildQualSlot(qm.a, 'a', qm, qi));
+  const dv = document.createElement('div'); dv.className = 'divider'; card.appendChild(dv);
+  card.appendChild(buildQualSlot(qm.b, 'b', qm, qi));
+  wrap.appendChild(card);
+  return wrap;
 }
 
-function buildMatchCard(match, rIdx, mIdx) {
-  const { rounds } = tournamentData;
-  const pA = resolveParticipant(match.a, rounds);
-  const pB = resolveParticipant(match.b, rounds);
+function buildQualSlot(p, side, qm, qi) {
+  const row = document.createElement('div');
+  row.className = 'slot';
+  const isWinner = qm.winner === side;
+  const isLoser = qm.winner && !isWinner;
+  if (isWinner) row.classList.add('winner');
+  if (isLoser) row.classList.add('loser');
 
-  const wrapper = document.createElement('div');
-  wrapper.className = 'match-wrapper';
+  const icon = isWinner ? `<span class="p-icon">👑</span>` : '';
+  row.innerHTML = `<span class="p-seed">${p.seed}</span><span class="p-name">${p.name}</span>${icon}`;
 
+  if (!qm.winner) {
+    row.style.cursor = 'pointer';
+    row.addEventListener('click', () => {
+      qm.winner = side;
+      cascadeClearFromQual(qi);
+      autoAdvance(tData.rounds, tData.qualMatches);
+      renderBracket();
+    });
+  } else if (isWinner) {
+    row.classList.add('decided');
+    row.addEventListener('click', () => {
+      qm.winner = null;
+      cascadeClearFromQual(qi);
+      autoAdvance(tData.rounds, tData.qualMatches);
+      renderBracket();
+    });
+  }
+  return row;
+}
+
+function cascadeClearFromQual(qi) {
+  const { rounds, thirdPlaceMatch } = tData;
+  const r0 = rounds[0];
+  for (let mi = 0; mi < r0.length; mi++) {
+    const m = r0[mi];
+    const usesQual = (m.a && m.a.fromQual === qi) || (m.b && m.b.fromQual === qi);
+    if (usesQual && m.winner) {
+      m.winner = null;
+      cascadeClear(0, mi);
+    }
+  }
+  if (thirdPlaceMatch) thirdPlaceMatch.winner = null;
+}
+
+function buildCard(match, rIdx, mIdx) {
+  const { rounds, qualMatches } = tData;
+  const pA = resolve(match.a, rounds, qualMatches);
+  const pB = resolve(match.b, rounds, qualMatches);
+  const wrap = document.createElement('div');
+  wrap.className = 'match-wrapper';
   const card = document.createElement('div');
   card.className = 'match-card';
 
@@ -752,271 +892,194 @@ function buildMatchCard(match, rIdx, mIdx) {
   idBar.textContent = match.id;
   card.appendChild(idBar);
 
-  // Auto handle byes silently
-  const isBye = (!match.a && match.b) || (match.a && !match.b) || (!match.a && !match.b);
-  const aClass = getParticipantClass(match, 'a', pA, pB, isBye);
-  const bClass = getParticipantClass(match, 'b', pB, pA, isBye);
-
-  card.appendChild(buildParticipantRow(pA, match.a, aClass, 'a', match, rIdx, mIdx));
-  const div = document.createElement('div');
-  div.className = 'divider';
-  card.appendChild(div);
-  card.appendChild(buildParticipantRow(pB, match.b, bClass, 'b', match, rIdx, mIdx));
-
-  wrapper.appendChild(card);
-  return wrapper;
+  card.appendChild(buildSlot(pA, 'a', match, rIdx, mIdx, pA, pB));
+  const dv = document.createElement('div'); dv.className = 'divider'; card.appendChild(dv);
+  card.appendChild(buildSlot(pB, 'b', match, rIdx, mIdx, pA, pB));
+  wrap.appendChild(card);
+  return wrap;
 }
 
-function getParticipantClass(match, side, p, opp, isBye) {
-  if (!p) return 'tbd';
-  if (match.winner === side) return 'winner';
-  if (match.winner && match.winner !== side) return 'loser';
-  return '';
-}
-
-function buildParticipantRow(p, slot, cls, side, match, rIdx, mIdx) {
+function buildSlot(p, side, match, rIdx, mIdx, pA, pB) {
   const row = document.createElement('div');
-  row.className = `participant ${cls}`;
-
+  row.className = 'slot';
   if (!p) {
     row.classList.add('tbd');
-    row.innerHTML = `<span class="p-seed">–</span><span class="p-name">TBD</span>`;
+    row.innerHTML = `<span class="p-seed">–</span><span class="p-name" style="color:var(--muted);font-style:italic">TBD</span>`;
     return row;
   }
+  const isWinner = match.winner === side;
+  const isLoser = match.winner && match.winner !== side;
+  if (isWinner) row.classList.add('winner');
+  if (isLoser) row.classList.add('loser');
 
   const seed = p.seed ? `<span class="p-seed">${p.seed}</span>` : `<span class="p-seed">–</span>`;
-  const crown = match.winner === side ? `<span class="p-crown">👑</span>` : '';
-  row.innerHTML = `${seed}<span class="p-name">${p.name}</span>${crown}`;
+  const icon = isWinner ? `<span class="p-icon">👑</span>` : '';
+  row.innerHTML = `${seed}<span class="p-name">${p.name}</span>${icon}`;
 
-  // Only clickable if both participants resolved and no winner yet
-  const { rounds } = tournamentData;
-  const pA = resolveParticipant(match.a, rounds);
-  const pB = resolveParticipant(match.b, rounds);
-
+  const { rounds, qualMatches } = tData;
   if (pA && pB && !match.winner) {
     row.style.cursor = 'pointer';
     row.addEventListener('click', () => {
       match.winner = side;
+      cascadeClear(rIdx, mIdx);
+      autoAdvance(rounds, qualMatches);
       renderBracket();
     });
-  } else if (match.winner === side) {
-    // Toggle: click winner to undo
+  } else if (isWinner) {
+    row.classList.add('decided');
     row.addEventListener('click', () => {
       match.winner = null;
-      // Cascade: clear downstream matches that relied on this
-      cascadeClear(rIdx, mIdx, rounds);
+      cascadeClear(rIdx, mIdx);
+      autoAdvance(rounds, qualMatches);
       renderBracket();
     });
   }
-
   return row;
 }
 
-function cascadeClear(rIdx, mIdx, rounds) {
-  // Find next round match that uses this match's output
-  const nextRoundIdx = rIdx + 1;
-  if (nextRoundIdx >= rounds.length) return;
-  const nextMatchIdx = Math.floor(mIdx / 2);
-  const nextMatch = rounds[nextRoundIdx][nextMatchIdx];
-  if (nextMatch && nextMatch.winner) {
-    nextMatch.winner = null;
-    cascadeClear(nextRoundIdx, nextMatchIdx, rounds);
-  }
-  // Also clear 3rd place if SF changed
-  const { thirdPlaceMatch } = tournamentData;
-  if (thirdPlaceMatch && rIdx === rounds.length - 2) {
-    thirdPlaceMatch.winner = null;
-  }
+function cascadeClear(rIdx, mIdx) {
+  const { rounds, thirdPlaceMatch } = tData;
+  const nr = rIdx + 1;
+  if (nr >= rounds.length) return;
+  const nm = rounds[nr][Math.floor(mIdx / 2)];
+  if (nm && nm.winner) { nm.winner = null; cascadeClear(nr, Math.floor(mIdx / 2)); }
+  if (thirdPlaceMatch && rIdx === rounds.length - 2) thirdPlaceMatch.winner = null;
 }
 
 function buildConnectors(prevCount, currCount, rIdx) {
-  const MATCH_H = 80;
-  const GAP_PREV = getMatchGap(rIdx - 1, tournamentData.rounds.length, tournamentData.rounds[0].length);
-  const GAP_CURR = getMatchGap(rIdx, tournamentData.rounds.length, tournamentData.rounds[0].length);
+  const GAP_PREV = gapForRound(rIdx - 1);
   const unitH = MATCH_H + GAP_PREV;
-  const totalH = prevCount * unitH;
-  const W = 36;
+  const totalH = prevCount * unitH - (prevCount > 1 ? GAP_PREV : 0);
+  const W = 32;
 
   const div = document.createElement('div');
-  div.style.cssText = `display:flex;flex-direction:column;justify-content:center;width:${W}px;height:${totalH + 20}px;flex-shrink:0;`;
+  div.className = 'connector-col';
+  div.style.cssText = `width:${W}px;height:${totalH}px;flex-shrink:0;margin-top:${LABEL_OFFSET}px;`;
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('width', W);
-  svg.setAttribute('height', totalH + 20);
+  svg.setAttribute('height', totalH);
+  svg.setAttribute('viewBox', `0 0 ${W} ${totalH}`);
 
   for (let i = 0; i < currCount; i++) {
-    const aIdx = i * 2;
-    const bIdx = i * 2 + 1;
-    const aY = (aIdx * unitH) + MATCH_H / 2 + 10;
-    const bY = bIdx < prevCount ? (bIdx * unitH) + MATCH_H / 2 + 10 : aY;
+    const aIdx = i * 2, bIdx = i * 2 + 1;
+    const aY = aIdx * unitH + MATCH_H / 2;
+    const bY = bIdx < prevCount ? (bIdx * unitH) + MATCH_H / 2 : aY;
     const midY = (aY + bY) / 2;
-    const outY = midY;
+    const stroke = '#2A2F48';
 
-    // horizontal from A
-    const lineA = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    lineA.setAttribute('x1', 0); lineA.setAttribute('y1', aY);
-    lineA.setAttribute('x2', W / 2); lineA.setAttribute('y2', aY);
-    lineA.setAttribute('stroke', '#CCC'); lineA.setAttribute('stroke-width', '2');
-    svg.appendChild(lineA);
-
+    const mk = (x1, y1, x2, y2) => {
+      const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+      l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+      l.setAttribute('stroke', stroke); l.setAttribute('stroke-width', '1.5');
+      svg.appendChild(l);
+    };
+    mk(0, aY, W / 2, aY);
     if (bIdx < prevCount) {
-      const lineB = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      lineB.setAttribute('x1', 0); lineB.setAttribute('y1', bY);
-      lineB.setAttribute('x2', W / 2); lineB.setAttribute('y2', bY);
-      lineB.setAttribute('stroke', '#CCC'); lineB.setAttribute('stroke-width', '2');
-      svg.appendChild(lineB);
-
-      // vertical connector
-      const lineV = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      lineV.setAttribute('x1', W / 2); lineV.setAttribute('y1', aY);
-      lineV.setAttribute('x2', W / 2); lineV.setAttribute('y2', bY);
-      lineV.setAttribute('stroke', '#CCC'); lineV.setAttribute('stroke-width', '2');
-      svg.appendChild(lineV);
+      mk(0, bY, W / 2, bY);
+      mk(W / 2, aY, W / 2, bY);
     }
-
-    // horizontal to next
-    const lineOut = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    lineOut.setAttribute('x1', W / 2); lineOut.setAttribute('y1', outY);
-    lineOut.setAttribute('x2', W); lineOut.setAttribute('y2', outY);
-    lineOut.setAttribute('stroke', '#CCC'); lineOut.setAttribute('stroke-width', '2');
-    svg.appendChild(lineOut);
+    mk(W / 2, midY, W, midY);
   }
-
   div.appendChild(svg);
   return div;
 }
 
-function buildChampConnector() {
-  const div = document.createElement('div');
-  div.style.cssText = 'display:flex;align-items:center;width:28px;flex-shrink:0;';
-  div.innerHTML = `<svg width="28" height="4"><line x1="0" y1="2" x2="28" y2="2" stroke="#CCC" stroke-width="2"/></svg>`;
-  return div;
-}
-
-// ─────────────────────────────────────────────
-//  THIRD PLACE
-// ─────────────────────────────────────────────
-function renderThirdPlace() {
-  const { rounds, thirdPlaceMatch } = tournamentData;
-  const section = document.getElementById('third-place-section');
-  section.innerHTML = '';
-
+function renderThird() {
+  const { rounds, qualMatches, thirdPlaceMatch } = tData;
+  const sec = document.getElementById('third-place-section');
+  sec.innerHTML = '';
   if (!thirdPlaceMatch) return;
-  const totalRounds = rounds.length;
-  if (totalRounds < 2) return;
+  const total = rounds.length;
+  if (total < 2) return;
 
-  const sfMatches = rounds[totalRounds - 2];
-  const sfMatch1 = sfMatches[0];
-  const sfMatch2 = sfMatches.length > 1 ? sfMatches[1] : sfMatches[0];
+  const sf = rounds[total - 2];
+  const sf1 = sf[0], sf2 = sf.length > 1 ? sf[1] : sf[0];
+  const l1 = sf1?.winner ? resolveLoser(sf1, rounds, qualMatches) : null;
+  const l2 = sf2?.winner ? resolveLoser(sf2, rounds, qualMatches) : null;
+  if (!l1 && !l2) return;
 
-  const loser1 = sfMatch1.winner ? resolveLoser(sfMatch1, rounds) : null;
-  const loser2 = sfMatch2.winner ? resolveLoser(sfMatch2, rounds) : null;
-
-  // Only show if at least one SF is resolved
-  if (!loser1 && !loser2) return;
-
-  const labelEl = document.createElement('div');
-  labelEl.className = 'third-label';
-  labelEl.textContent = '🥉 Perebutan Juara 3';
-  section.appendChild(labelEl);
-
-  // Build a fake match object for 3rd place
-  const pA = loser1;
-  const pB = loser2;
+  const badge = document.createElement('div');
+  badge.className = 'third-label-badge';
+  badge.textContent = '🥉 Perebutan Juara 3';
+  sec.appendChild(badge);
 
   const card = document.createElement('div');
   card.className = 'match-card round-3rd';
   card.innerHTML = `<div class="match-id">${thirdPlaceMatch.id}</div>`;
 
-  // Row A
-  const rowA = document.createElement('div');
-  rowA.className = `participant ${thirdPlaceMatch.winner === 'a' ? 'winner' : (thirdPlaceMatch.winner === 'b' ? 'loser' : '')}`;
-  if (pA) {
-    rowA.innerHTML = `<span class="p-seed">–</span><span class="p-name">${pA.name}</span>${thirdPlaceMatch.winner === 'a' ? '<span class="p-crown">🥉</span>' : ''}`;
-    if (!thirdPlaceMatch.winner && pB) {
-      rowA.style.cursor = 'pointer';
-      rowA.addEventListener('click', () => { thirdPlaceMatch.winner = 'a'; renderThirdPlace(); renderResults(); });
-    } else if (thirdPlaceMatch.winner === 'a') {
-      rowA.addEventListener('click', () => { thirdPlaceMatch.winner = null; renderThirdPlace(); renderResults(); });
+  const mkRow = (p, side) => {
+    const row = document.createElement('div');
+    row.className = 'slot';
+    const opp = side === 'a' ? l2 : l1;
+    if (!p) {
+      row.classList.add('tbd');
+      row.innerHTML = `<span class="p-seed">–</span><span class="p-name" style="color:var(--muted);font-style:italic">TBD</span>`;
+      return row;
     }
-  } else {
-    rowA.classList.add('tbd');
-    rowA.innerHTML = `<span class="p-seed">–</span><span class="p-name">TBD</span>`;
-  }
-  card.appendChild(rowA);
-
-  const div = document.createElement('div');
-  div.className = 'divider';
-  card.appendChild(div);
-
-  // Row B
-  const rowB = document.createElement('div');
-  rowB.className = `participant ${thirdPlaceMatch.winner === 'b' ? 'winner' : (thirdPlaceMatch.winner === 'a' ? 'loser' : '')}`;
-  if (pB) {
-    rowB.innerHTML = `<span class="p-seed">–</span><span class="p-name">${pB.name}</span>${thirdPlaceMatch.winner === 'b' ? '<span class="p-crown">🥉</span>' : ''}`;
-    if (!thirdPlaceMatch.winner && pA) {
-      rowB.style.cursor = 'pointer';
-      rowB.addEventListener('click', () => { thirdPlaceMatch.winner = 'b'; renderThirdPlace(); renderResults(); });
-    } else if (thirdPlaceMatch.winner === 'b') {
-      rowB.addEventListener('click', () => { thirdPlaceMatch.winner = null; renderThirdPlace(); renderResults(); });
+    const isW = thirdPlaceMatch.winner === side;
+    const isL = thirdPlaceMatch.winner && !isW;
+    if (isW) row.classList.add('winner');
+    if (isL) row.classList.add('loser');
+    row.innerHTML = `<span class="p-seed">–</span><span class="p-name">${p.name}</span>${isW ? '<span class="p-icon">🥉</span>' : ''}`;
+    if (!thirdPlaceMatch.winner && opp) {
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', () => { thirdPlaceMatch.winner = side; renderBracket(); });
+    } else if (isW) {
+      row.classList.add('decided');
+      row.addEventListener('click', () => { thirdPlaceMatch.winner = null; renderBracket(); });
     }
-  } else {
-    rowB.classList.add('tbd');
-    rowB.innerHTML = `<span class="p-seed">–</span><span class="p-name">TBD</span>`;
-  }
-  card.appendChild(rowB);
-  section.appendChild(card);
+    return row;
+  };
+
+  card.appendChild(mkRow(l1, 'a'));
+  const dv = document.createElement('div'); dv.className = 'divider'; card.appendChild(dv);
+  card.appendChild(mkRow(l2, 'b'));
+  sec.appendChild(card);
 }
 
-// ─────────────────────────────────────────────
-//  RESULTS
-// ─────────────────────────────────────────────
 function renderResults() {
-  const { rounds, thirdPlaceMatch } = tournamentData;
-  const totalRounds = rounds.length;
-  const finalMatch = rounds[totalRounds - 1][0];
+  const { rounds, qualMatches, thirdPlaceMatch } = tData;
+  const total = rounds.length;
+  const fm = rounds[total - 1]?.[0];
   const panel = document.getElementById('results-panel');
+  if (!fm?.winner) { panel.style.display = 'none'; return; }
 
-  const champ = finalMatch.winner ? resolveParticipant(finalMatch.winner === 'a' ? finalMatch.a : finalMatch.b, rounds) : null;
-  const runner = finalMatch.winner ? resolveParticipant(finalMatch.winner === 'a' ? finalMatch.b : finalMatch.a, rounds) : null;
-  const third = thirdPlaceMatch?.winner
-    ? (thirdPlaceMatch.winner === 'a'
-      ? resolveLoser(rounds[totalRounds - 2]?.[0], rounds)
-      : resolveLoser(rounds[totalRounds - 2]?.[1] || rounds[totalRounds - 2]?.[0], rounds))
-    : null;
+  const champ = resolve(fm.winner === 'a' ? fm.a : fm.b, rounds, qualMatches);
+  const runner = resolve(fm.winner === 'a' ? fm.b : fm.a, rounds, qualMatches);
+  let third = null;
+  if (thirdPlaceMatch?.winner) {
+    const sf = rounds[total - 2];
+    const sf1 = sf[0], sf2 = sf.length > 1 ? sf[1] : sf[0];
+    third = thirdPlaceMatch.winner === 'a' ? resolveLoser(sf1, rounds, qualMatches) : resolveLoser(sf2, rounds, qualMatches);
+  }
 
-  if (!champ) { panel.style.display = 'none'; return; }
   panel.style.display = 'block';
-
-  const podium = [
+  document.getElementById('podium-list').innerHTML = [
     { medal: '🥇', label: 'Juara 1', name: champ?.name || '?' },
     { medal: '🥈', label: 'Juara 2', name: runner?.name || '?' },
     { medal: '🥉', label: 'Juara 3', name: third?.name || '(belum ditentukan)' },
-  ];
-
-  document.getElementById('podium-list').innerHTML = podium.map(p => `
-    <div class="podium-row">
-      <div class="podium-medal">${p.medal}</div>
+  ].map(p => `
+    <div class="podium-item">
+      <div class="medal">${p.medal}</div>
       <div>
-        <div style="font-size:10px;color:#888;font-family:'JetBrains Mono',monospace;">${p.label}</div>
-        <div class="podium-name">${p.name}</div>
+        <div class="pos">${p.label}</div>
+        <div class="pname">${p.name}</div>
       </div>
     </div>
   `).join('');
 
-  // Update champion card
-  const champName = document.getElementById('champ-name');
-  if (champName) champName.textContent = champ.name;
+  const cn = document.getElementById('champ-name');
+  if (cn) cn.textContent = champ?.name || '?';
 }
 
-// ─────────────────────────────────────────────
-//  RESET
-// ─────────────────────────────────────────────
 document.getElementById('btn-reset').addEventListener('click', () => {
   document.getElementById('bracket-screen').style.display = 'none';
   document.getElementById('setup-screen').style.display = 'block';
-  document.getElementById('results-panel').style.display = 'none';
+  document.getElementById('header-badge').textContent = 'SETUP';
 });
 </script>
+
 </body>
 </html>
